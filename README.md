@@ -1,2 +1,1 @@
-# maple_story
-maple story v079
+maple story 079
