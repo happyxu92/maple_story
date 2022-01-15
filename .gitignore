@@ -1,3 +1,5 @@
+out/*
+
 # Compiled class file
 *.class
 
@@ -8,7 +10,7 @@ log/*
 logs/*
 
 # config file
-
+./config/source
 
 # BlueJ files
 *.ctxt
