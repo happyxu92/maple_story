@@ -3,6 +3,12 @@
 
 # Log file
 *.log
+LOGS/*
+log/*
+logs/*
+
+# config file
+
 
 # BlueJ files
 *.ctxt
