@@ -44,7 +44,7 @@ public class EventScriptManager extends AbstractScriptManager
         for (final EventEntry entry : this.events.values()) {
             try {
                 ((ScriptEngine)entry.iv).put("em", entry.em);
-                entry.iv.invokeFunction("init", null);
+                entry.iv.invokeFunction("init");
             }
             catch (Exception ex) {
                 System.out.println("Error initiating event: " + entry.script + ":" + ex);

@@ -1213,7 +1213,7 @@ public class MapleMap
     public boolean containsNPC(int npcid) {
         (this.mapobjectlocks.get(MapleMapObjectType.NPC)).readLock().lock();
         try {
-            Iterator<MapleMapObject> itr = ((LinkedHashMap)this.mapobjects.get(MapleMapObjectType.NPC)).values().iterator();
+            Iterator<MapleMapObject> itr = this.mapobjects.get(MapleMapObjectType.NPC).values().iterator();
             while (itr.hasNext()) {
                 MapleNPC n = (MapleNPC)itr.next();
                 if (n.getId() == npcid)
@@ -1228,7 +1228,7 @@ public class MapleMap
     public MapleNPC getNPCById(int id) {
         (this.mapobjectlocks.get(MapleMapObjectType.NPC)).readLock().lock();
         try {
-            Iterator<MapleMapObject> itr = ((LinkedHashMap)this.mapobjects.get(MapleMapObjectType.NPC)).values().iterator();
+            Iterator<MapleMapObject> itr = this.mapobjects.get(MapleMapObjectType.NPC).values().iterator();
             while (itr.hasNext()) {
                 MapleNPC n = (MapleNPC)itr.next();
                 if (n.getId() == id)
@@ -1244,7 +1244,7 @@ public class MapleMap
         (this.mapobjectlocks.get(MapleMapObjectType.MONSTER)).readLock().lock();
         try {
             MapleMonster ret = null;
-            Iterator<MapleMapObject> itr = ((LinkedHashMap)this.mapobjects.get(MapleMapObjectType.MONSTER)).values().iterator();
+            Iterator<MapleMapObject> itr = this.mapobjects.get(MapleMapObjectType.MONSTER).values().iterator();
             while (itr.hasNext()) {
                 MapleMonster n = (MapleMonster)itr.next();
                 if (n.getId() == id) {
@@ -1262,7 +1262,7 @@ public class MapleMap
         (this.mapobjectlocks.get(MapleMapObjectType.MONSTER)).readLock().lock();
         try {
             int ret = 0;
-            Iterator<MapleMapObject> itr = ((LinkedHashMap)this.mapobjects.get(MapleMapObjectType.MONSTER)).values().iterator();
+            Iterator<MapleMapObject> itr = this.mapobjects.get(MapleMapObjectType.MONSTER).values().iterator();
             while (itr.hasNext()) {
                 MapleMonster n = (MapleMonster)itr.next();
                 if (n.getId() == id)
@@ -1278,7 +1278,7 @@ public class MapleMap
         (this.mapobjectlocks.get(MapleMapObjectType.REACTOR)).readLock().lock();
         try {
             MapleReactor ret = null;
-            Iterator<MapleMapObject> itr = ((LinkedHashMap)this.mapobjects.get(MapleMapObjectType.REACTOR)).values().iterator();
+            Iterator<MapleMapObject> itr = this.mapobjects.get(MapleMapObjectType.REACTOR).values().iterator();
             while (itr.hasNext()) {
                 MapleReactor n = (MapleReactor)itr.next();
                 if (n.getReactorId() == id) {
@@ -1347,7 +1347,7 @@ public class MapleMap
     public void removeNpc(int npcid) {
         (this.mapobjectlocks.get(MapleMapObjectType.NPC)).writeLock().lock();
         try {
-            Iterator<MapleMapObject> itr = ((LinkedHashMap)this.mapobjects.get(MapleMapObjectType.NPC)).values().iterator();
+            Iterator<MapleMapObject> itr = this.mapobjects.get(MapleMapObjectType.NPC).values().iterator();
             while (itr.hasNext()) {
                 MapleNPC npc = (MapleNPC)itr.next();
                 if (npc.isCustom() && npc.getId() == npcid) {
@@ -2861,7 +2861,7 @@ public class MapleMap
     public void hideNpc(int npcid) {
         (this.mapobjectlocks.get(MapleMapObjectType.NPC)).readLock().lock();
         try {
-            Iterator<MapleMapObject> itr = ((LinkedHashMap)this.mapobjects.get(MapleMapObjectType.NPC)).values().iterator();
+            Iterator<MapleMapObject> itr = this.mapobjects.get(MapleMapObjectType.NPC).values().iterator();
             while (itr.hasNext()) {
                 MapleNPC npc = (MapleNPC)itr.next();
                 if (npcid == -1 || npc.getId() == npcid) {
@@ -3374,7 +3374,7 @@ public class MapleMap
     }
     
     public List<Integer> getAllUniqueMonsters() {
-        final ArrayList ret = new ArrayList();
+        final ArrayList<Integer> ret = new ArrayList<>();
         this.mapobjectlocks.get(MapleMapObjectType.MONSTER).readLock().lock();
         try {
             for (final MapleMapObject mmo : this.mapobjects.get(MapleMapObjectType.MONSTER).values()) {
@@ -3387,7 +3387,7 @@ public class MapleMap
         finally {
             this.mapobjectlocks.get(MapleMapObjectType.MONSTER).readLock().unlock();
         }
-        return (List<Integer>)ret;
+        return ret;
     }
     
     public int getNumPlayersItemsInArea(final int index) {
@@ -3501,7 +3501,7 @@ public class MapleMap
     }
     
     public List<MapleCharacter> getCharactersIntersect(final Rectangle box) {
-        final List ret = new ArrayList();
+        final List<MapleCharacter> ret = new ArrayList<>();
         this.charactersLock.readLock().lock();
         try {
             for (final MapleCharacter chr : this.characters) {
@@ -3513,7 +3513,7 @@ public class MapleMap
         finally {
             this.charactersLock.readLock().unlock();
         }
-        return (List<MapleCharacter>)ret;
+        return ret;
     }
     
     public boolean isPvpMap() {

@@ -53,7 +53,7 @@ public class EventManager
     
     public void cancel() {
         try {
-            this.iv.invokeFunction("cancelSchedule", null);
+            this.iv.invokeFunction("cancelSchedule");
         }
         catch (Exception ex) {
             System.out.println("Event name : " + this.name + ", method Name : cancelSchedule:\n" + ex);
@@ -66,7 +66,7 @@ public class EventManager
             @Override
             public void run() {
                 try {
-                    EventManager.this.iv.invokeFunction(methodName, null);
+                    EventManager.this.iv.invokeFunction(methodName);
                 }
                 catch (Exception ex) {
                     System.out.println("Event name : " + EventManager.this.name + ", method Name : " + methodName + ":\n" + ex);
@@ -111,7 +111,7 @@ public class EventManager
             @Override
             public void run() {
                 try {
-                    EventManager.this.iv.invokeFunction(methodName, null);
+                    EventManager.this.iv.invokeFunction(methodName);
                 }
                 catch (ScriptException ex) {
                     System.out.println("Event name : " + EventManager.this.name + ", method Name : " + methodName + ":\n" + ex);
@@ -183,7 +183,7 @@ public class EventManager
     
     public void startInstance() {
         try {
-            this.iv.invokeFunction("setup", null);
+            this.iv.invokeFunction("setup");
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -215,7 +215,7 @@ public class EventManager
     
     public void startInstance(final MapleCharacter character, final String leader) {
         try {
-            final EventInstanceManager eim = (EventInstanceManager)this.iv.invokeFunction("setup", null);
+            final EventInstanceManager eim = (EventInstanceManager)this.iv.invokeFunction("setup");
             eim.registerPlayer(character);
             eim.setProperty("leader", leader);
             eim.setProperty("guildid", String.valueOf(character.getGuildId()));
@@ -240,7 +240,7 @@ public class EventManager
     
     public void startInstance(final MapleCharacter character) {
         try {
-            final EventInstanceManager eim = (EventInstanceManager)this.iv.invokeFunction("setup", null);
+            final EventInstanceManager eim = (EventInstanceManager)this.iv.invokeFunction("setup");
             eim.registerPlayer(character);
         }
         catch (Exception ex) {
@@ -269,7 +269,7 @@ public class EventManager
     
     public void startInstance_NoID(final MapleParty party, final MapleMap map, final Exception old) {
         try {
-            final EventInstanceManager eim = (EventInstanceManager)this.iv.invokeFunction("setup", null);
+            final EventInstanceManager eim = (EventInstanceManager)this.iv.invokeFunction("setup");
             eim.registerParty(party, map);
         }
         catch (Exception ex) {

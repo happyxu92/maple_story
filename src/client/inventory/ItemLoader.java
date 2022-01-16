@@ -98,7 +98,7 @@ public enum ItemLoader {
                     if (ring != null)
                         equip.setRing(ring);
                 }
-                items.put(Integer.valueOf(rs.getInt("inventoryitemid")), new Pair(equip.copy(), mit));
+                items.put(rs.getInt("inventoryitemid"), new Pair<>(equip.copy(), mit));
                 continue;
             }
             Item item = new Item(rs.getInt("itemid"), rs.getShort("position"), rs.getShort("quantity"), rs.getByte("flag"));
@@ -118,7 +118,7 @@ public enum ItemLoader {
                     item.setUniqueId(new_unique);
                     item.setPet(MaplePet.createPet(item.getItemId(), new_unique));
                 }
-            items.put(Integer.valueOf(rs.getInt("inventoryitemid")), new Pair(item.copy(), mit));
+            items.put(rs.getInt("inventoryitemid"), new Pair<>(item.copy(), mit));
         }
         rs.close();
         ps.close();
@@ -195,7 +195,7 @@ public enum ItemLoader {
                             equip.setRing(ring);
                     }
                 }
-                items.put(Integer.valueOf(rs.getInt("inventoryitemid")), new Pair(equip.copy(), mit));
+                items.put(Integer.valueOf(rs.getInt("inventoryitemid")), new Pair<>(equip.copy(), mit));
                 continue;
             }
             Item item = new Item(rs.getInt("itemid"), rs.getShort("position"), rs.getShort("quantity"), rs.getByte("flag"));
@@ -215,7 +215,7 @@ public enum ItemLoader {
                     item.setUniqueId(new_unique);
                     item.setPet(MaplePet.createPet(item.getItemId(), new_unique));
                 }
-            items.put(Integer.valueOf(rs.getInt("inventoryitemid")), new Pair(item.copy(), mit));
+            items.put(rs.getInt("inventoryitemid"), new Pair<>(item.copy(), mit));
         }
         rs.close();
         ps.close();

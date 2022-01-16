@@ -17,7 +17,7 @@ public class PetDataFactory {
     private static final Map<Integer, Integer> petHunger = new HashMap<>();
 
     public static PetCommand getPetCommand(int petId, int skillId) {
-        PetCommand ret = petCommands.get(new Pair(Integer.valueOf(petId), Integer.valueOf(skillId)));
+        PetCommand ret = petCommands.get(new Pair<>(Integer.valueOf(petId), Integer.valueOf(skillId)));
         if (ret != null)
             return ret;
         MapleData skillData = dataRoot.getData("Pet/" + petId + ".img");
@@ -28,7 +28,7 @@ public class PetDataFactory {
             inc = MapleDataTool.getInt("interact/" + skillId + "/inc", skillData, 0);
         }
         ret = new PetCommand(petId, skillId, prob, inc);
-        petCommands.put(new Pair(Integer.valueOf(petId), Integer.valueOf(skillId)), ret);
+        petCommands.put(new Pair<>(Integer.valueOf(petId), Integer.valueOf(skillId)), ret);
         return ret;
     }
 

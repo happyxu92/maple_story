@@ -268,7 +268,7 @@ public class StatsHandling
     }
     
     public static void AutoAssignAP(final SeekableLittleEndianAccessor slea, final MapleClient c, final MapleCharacter chr) {
-        final List statupdate = new ArrayList(2);
+        final List<Pair<MapleStat,Integer>> statupdate = new ArrayList<>(2);
         c.getSession().write(MaplePacketCreator.updatePlayerStats(statupdate, true, chr.getJob()));
         final PlayerStats playerst = chr.getStat();
         slea.readInt();
@@ -282,7 +282,7 @@ public class StatsHandling
                             return;
                         }
                         playerst.setStr((short)(playerst.getStr() + updatenumber));
-                        statupdate.add(new Pair<MapleStat, Integer>(MapleStat.STR, (int)playerst.getStr()));
+                        statupdate.add(new Pair<>(MapleStat.STR, (int) playerst.getStr()));
                         break;
                     }
                     case 512: {
@@ -290,7 +290,7 @@ public class StatsHandling
                             return;
                         }
                         playerst.setDex((short)(playerst.getDex() + updatenumber));
-                        statupdate.add(new Pair<MapleStat, Integer>(MapleStat.DEX, (int)playerst.getDex()));
+                        statupdate.add(new Pair<>(MapleStat.DEX, (int) playerst.getDex()));
                         break;
                     }
                     case 1024: {
@@ -298,7 +298,7 @@ public class StatsHandling
                             return;
                         }
                         playerst.setInt((short)(playerst.getInt() + updatenumber));
-                        statupdate.add(new Pair<MapleStat, Integer>(MapleStat.INT, (int)playerst.getInt()));
+                        statupdate.add(new Pair<>(MapleStat.INT, (int) playerst.getInt()));
                         break;
                     }
                     case 2048: {
@@ -306,7 +306,7 @@ public class StatsHandling
                             return;
                         }
                         playerst.setLuk((short)(playerst.getLuk() + updatenumber));
-                        statupdate.add(new Pair<MapleStat, Integer>(MapleStat.LUK, (int)playerst.getLuk()));
+                        statupdate.add(new Pair<>(MapleStat.LUK, (int) playerst.getLuk()));
                         break;
                     }
                     default: {
@@ -320,7 +320,7 @@ public class StatsHandling
                 StatsHandling.log.info("[h4x] Player {} is distributing AP to {} without having any", chr.getName(), update);
             }
         }
-        statupdate.add(new Pair<MapleStat, Integer>(MapleStat.AVAILABLEAP, (int)chr.getRemainingAp()));
+        statupdate.add(new Pair<>(MapleStat.AVAILABLEAP, (int) chr.getRemainingAp()));
         c.getSession().write(MaplePacketCreator.updatePlayerStats(statupdate, true, chr.getJob()));
     }
     

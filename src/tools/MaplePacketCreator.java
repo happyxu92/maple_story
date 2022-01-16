@@ -6968,7 +6968,7 @@ public class MaplePacketCreator
     }
     
     public static MaplePacket getInventoryStatus() {
-        return modifyInventory(false, Collections.EMPTY_LIST);
+        return modifyInventory(false, Collections.<ModifyInventory>emptyList());
     }
     
     static {

@@ -119,14 +119,14 @@ public class MapleParty implements Serializable
                 }
             }
             else {
-                final ArrayList applytos = new ArrayList();
+                final ArrayList<Integer> applytos = new ArrayList<>();
                 applytos.add(applyto);
                 this.partyBuffs.get(buffId).put(applyfrom, applytos);
             }
         }
         else {
             final Map<Integer, List<Integer>> hMap = new HashMap<Integer, List<Integer>>();
-            final ArrayList applytos2 = new ArrayList();
+            final ArrayList<Integer> applytos2 = new ArrayList<>();
             applytos2.add(applyto);
             hMap.put(applyfrom, applytos2);
             this.partyBuffs.put(buffId, hMap);

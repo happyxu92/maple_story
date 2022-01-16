@@ -139,7 +139,7 @@ public class DatabaseConnection
                 }
                 else {
                     DatabaseConnection.connectionTimeOut = timeout;
-                    FileoutputUtil.logToFile(FileoutputUtil.initLog, "数据库正在加载.请稍等....");
+                    FileoutputUtil.logToFile(FileoutputUtil.initLog, "数据库正在加载.请稍等....\r\n");
                 }
                 DatabaseConnection.propsInited = true;
             }

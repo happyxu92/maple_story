@@ -805,7 +805,7 @@ public class AdminCommand {
 
     public static class UnlockInv extends CommandExecute {
         public int execute(MapleClient c, String[] splitted) {
-            ArrayMap<IItem, MapleInventoryType> arrayMap = new ArrayMap();
+            ArrayMap<IItem, MapleInventoryType> arrayMap = new ArrayMap<>();
             boolean add = false;
             if (splitted.length < 2 || splitted[1].equals("全部")) {
                 for (MapleInventoryType type : MapleInventoryType.values()) {

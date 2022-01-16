@@ -1663,7 +1663,7 @@ public class NPCConversationManager extends AbstractPlayerInteraction
     }
 
     public String checkMapDrop() {
-        List<MonsterGlobalDropEntry> ranks = new ArrayList(MapleMonsterInformationProvider.getInstance().getGlobalDrop());
+        List<MonsterGlobalDropEntry> ranks = new ArrayList<>(MapleMonsterInformationProvider.getInstance().getGlobalDrop());
         int mapid = this.c.getPlayer().getMap().getId();
         int cashServerRate = getClient().getChannelServer().getCashRate();
         int globalServerRate = 1;

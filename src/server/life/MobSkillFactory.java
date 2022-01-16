@@ -24,7 +24,7 @@ public class MobSkillFactory
     }
     
     public static MobSkill getMobSkill(final int skillId, final int level) {
-        MobSkill ret = MobSkillFactory.mobSkills.get(new Pair(skillId, level));
+        MobSkill ret = MobSkillFactory.mobSkills.get(new Pair<>(skillId, level));
         if (ret != null) {
             return ret;
         }

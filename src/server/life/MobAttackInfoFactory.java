@@ -21,7 +21,7 @@ public class MobAttackInfoFactory
     }
     
     public MobAttackInfo getMobAttackInfo(final MapleMonster mob, final int attack) {
-        MobAttackInfo ret = MobAttackInfoFactory.mobAttacks.get(new Pair(mob.getId(), attack));
+        MobAttackInfo ret = MobAttackInfoFactory.mobAttacks.get(new Pair<>(mob.getId(), attack));
         if (ret != null) {
             return ret;
         }

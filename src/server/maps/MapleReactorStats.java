@@ -42,7 +42,7 @@ public class MapleReactorStats
     }
     
     public void addState(final byte state, final int type, final Pair<Integer, Integer> reactItem, final byte nextState, final int timeOut, final byte canTouch) {
-        final StateData newState = new StateData(type, (Pair)reactItem, nextState, timeOut, canTouch);
+        final StateData newState = new StateData(type, reactItem, nextState, timeOut, canTouch);
         this.stateInfo.put(state, newState);
     }
     
