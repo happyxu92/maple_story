@@ -1057,7 +1057,7 @@ public class MaplePacketCreator
         final ServerConstants ERROR = new ServerConstants();
         if ((ServerConstants.PACKET_ERROR_OFF && ERROR.getChannel() != 1) || ERROR.getRemovePlayerFromMap() != 1) {
             final String note = "时间：" + FileoutputUtil.CurrentReadable_Time() + " || 玩家名字：" + chr.getName() + "|| 玩家地图：" + chr.getMapId() + "\r\n38错误：" + ERROR.getPACKET_ERROR() + "\r\n\r\n";
-            FileoutputUtil.packetLog("logs/38掉线/" + chr.getName() + ".log", note);
+            FileoutputUtil.packetLog("Logs/38ErrorDisconnect/" + chr.getName() + ".log", note);
         }
         return mplew.getPacket();
     }

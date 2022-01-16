@@ -28,6 +28,9 @@ public class FileoutputUtil
     public static String Pinkbean_Log;
     public static String ScriptEx_Log;
     public static String PacketEx_Log;
+    public static String partyLog;
+    public static String giveACashLog;
+    public static String initLog;
     public static final SimpleDateFormat sdf;
     private static final SimpleDateFormat sdf_;
     
@@ -195,20 +198,23 @@ public class FileoutputUtil
     
     static {
         sdfT = new SimpleDateFormat("yyyy年MM月dd日HH時mm分ss秒");
-        FileoutputUtil.fixdam_mg = "Logs/魔法伤害修正.rtf";
-        FileoutputUtil.fixdam_ph = "Logs/物理伤害修正.rtf";
-        FileoutputUtil.MobVac_log = "Logs/Log_吸怪.txt";
-        FileoutputUtil.hack_log = "Logs/Log_怀疑外挂.rtf";
-        FileoutputUtil.ban_log = "Logs/Log_封号.rtf";
-        FileoutputUtil.Acc_Stuck = "Logs/Log_卡账号.rtf";
-        FileoutputUtil.Login_Error = "Logs/Log_登录错误.rtf";
-        FileoutputUtil.Movement_Log = "Logs/移动出错.log";
-        FileoutputUtil.IP_Log = "Logs/Log_账号IP.rtf";
-        FileoutputUtil.Zakum_Log = "Logs/Log_扎昆.rtf";
-        FileoutputUtil.Horntail_Log = "Logs/Log_暗黑龙王.rtf";
-        FileoutputUtil.Pinkbean_Log = "Logs/Log_品克缤.rtf";
-        FileoutputUtil.ScriptEx_Log = "Logs/Log_Script_脚本异常.rtf";
-        FileoutputUtil.PacketEx_Log = "Logs/Log_Packet_封包异常.rtf";
+        FileoutputUtil.fixdam_mg = "Logs/fix_magic_damage.rtf";
+        FileoutputUtil.fixdam_ph = "Logs/fix_physical_damage.rtf";
+        FileoutputUtil.MobVac_log = "Logs/xiguai.txt";
+        FileoutputUtil.hack_log = "Logs/hack_log.rtf";
+        FileoutputUtil.ban_log = "Logs/ban_log.rtf";
+        FileoutputUtil.Acc_Stuck = "Logs/account.rtf";
+        FileoutputUtil.Login_Error = "Logs/login_error.rtf";
+        FileoutputUtil.Movement_Log = "Logs/move_error.log";
+        FileoutputUtil.IP_Log = "Logs/account_ip.rtf";
+        FileoutputUtil.Zakum_Log = "Logs/zakum.rtf";
+        FileoutputUtil.Horntail_Log = "Logs/horntail.rtf";
+        FileoutputUtil.Pinkbean_Log = "Logs/pinkbean.rtf";
+        FileoutputUtil.ScriptEx_Log = "Logs/script_exception.rtf";
+        FileoutputUtil.PacketEx_Log = "Logs/packet_exception.rtf";
+        FileoutputUtil.partyLog = "Logs/party.log";
+        FileoutputUtil.giveACashLog = "Logs/giveACash";
+        FileoutputUtil.initLog = "Logs/init";
         sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         sdf_ = new SimpleDateFormat("yyyy-MM-dd");
     }

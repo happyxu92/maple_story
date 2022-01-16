@@ -1,5 +1,7 @@
 package database;
 
+import tools.FileoutputUtil;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -137,7 +139,7 @@ public class DatabaseConnection
                 }
                 else {
                     DatabaseConnection.connectionTimeOut = timeout;
-                    System.out.println("数据库正在加载.请稍等....");
+                    FileoutputUtil.logToFile(FileoutputUtil.initLog, "数据库正在加载.请稍等....");
                 }
                 DatabaseConnection.propsInited = true;
             }

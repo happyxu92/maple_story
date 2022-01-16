@@ -333,7 +333,7 @@ public class MapleServerHandler extends IoHandlerAdapter implements MapleServerH
                 final RecvPacketOpcode recv = values[i];
                 if (recv.getValue() == header_num) {
                     if (MapleServerHandler.debugMode && !RecvPacketOpcode.isSpamHeader(recv)) {
-                        final StringBuilder sb = new StringBuilder("Received data 已處理 :" + String.valueOf(recv) + "\n");
+                        final StringBuilder sb = new StringBuilder("Received data handled :" + String.valueOf(recv) + "\n");
                         sb.append(HexTool.toString((byte[])message)).append("\n").append(HexTool.toStringFromAscii((byte[])message));
                         System.out.println(sb.toString());
                     }
@@ -366,7 +366,7 @@ public class MapleServerHandler extends IoHandlerAdapter implements MapleServerH
                 }
             }
             if (MapleServerHandler.debugMode) {
-                final StringBuilder sb2 = new StringBuilder("Received data 未處理 : ");
+                final StringBuilder sb2 = new StringBuilder("Received data but not handle: ");
                 sb2.append(HexTool.toString((byte[])message)).append("\n").append(HexTool.toStringFromAscii((byte[])message));
                 System.out.println(sb2.toString());
             }

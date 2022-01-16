@@ -332,7 +332,9 @@ public class GMCommand
                     mch2.startMapEffect(msg, 5121009);
                 }
             }
-            FileoutputUtil.logToFile("logs/Data/给予点卷_"+ DateUtil.getCurrentDateStr2()+"_a.txt", "\r\n " + FileoutputUtil.NowTime() + " GM " + c.getPlayer().getName() + " 给了 " + player.getName() + " 点卷 " + amount + "点");
+            FileoutputUtil.logToFile(FileoutputUtil.giveACashLog + DateUtil.getCurrentDateStr2()+"_a.txt",
+                    FileoutputUtil.NowTime() + " GM " + c.getPlayer().getName() + " 给了 "
+                            + player.getName() + " 点卷 " + amount + "点" + "\r\n ");
             return 1;
         }
 

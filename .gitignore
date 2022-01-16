@@ -5,7 +5,7 @@ out/*
 
 # Log file
 *.log
-LOGS/*
+Logs/*
 log/*
 logs/*
 
