@@ -50,7 +50,7 @@ public class HiredMerchantHandler
             }
         }
         else {
-            c.getSession().close();
+            c.getSession().close(false);
         }
     }
     

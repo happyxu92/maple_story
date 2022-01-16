@@ -10,7 +10,6 @@ import client.inventory.MapleInventoryType;
 import client.inventory.MaplePet;
 import client.status.MonsterStatus;
 import client.status.MonsterStatusEffect;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import constants.GameConstants;
 import constants.ServerConstants;
 import database.DatabaseConnection;
