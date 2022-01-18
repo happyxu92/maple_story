@@ -43,7 +43,7 @@ public class CashShopServer
         try {
             CashShopServer.acceptor.setHandler(new MapleServerHandler(-1, true));
             CashShopServer.acceptor.bind(new InetSocketAddress(CashShopServer.PORT));
-            System.out.println("商城    1: 启动端口 " + CashShopServer.PORT);
+            System.out.println("Cash shop port: " + CashShopServer.PORT);
         }
         catch (IOException e) {
             System.err.println("Binding to port " + CashShopServer.PORT + " failed");

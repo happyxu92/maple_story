@@ -1816,20 +1816,20 @@ public class MapleMap
         final boolean 进入地图开启显示数据 = false;
         if (this.mapid == 109080000 || this.mapid == 109080001 || this.mapid == 109080002 || this.mapid == 109080003 || this.mapid == 109080010 || this.mapid == 109080011 || this.mapid == 109080012) {
             chr.setCoconutTeam(this.getAndSwitchTeam() ? 0 : 1);
-            if (ServerConstants.封包显示 || 进入地图开启显示数据) {
+            if (ServerConstants.PACKET_DISPLAY || 进入地图开启显示数据) {
                 System.out.println("进入地图加载数据A");
             }
         }
         final MaplePacket packet = MaplePacketCreator.spawnPlayerMapobject(chr);
         if (!chr.isHidden()) {
             this.broadcastMessage(chr, packet, false);
-            if (ServerConstants.封包显示 || 进入地图开启显示数据) {
+            if (ServerConstants.PACKET_DISPLAY || 进入地图开启显示数据) {
                 System.out.println("进入地图加载数据B");
             }
             if (chr.isGM() && this.speedRunStart > 0L) {
                 this.endSpeedRun();
                 this.broadcastMessage(MaplePacketCreator.serverNotice(5, "The speed run has ended."));
-                if (ServerConstants.封包显示 || 进入地图开启显示数据) {
+                if (ServerConstants.PACKET_DISPLAY || 进入地图开启显示数据) {
                     System.out.println("进入地图加载数据C");
                 }
             }
@@ -1846,7 +1846,7 @@ public class MapleMap
             if (!this.onFirstUserEnter.equals("") && this.getCharactersSize() == 1) {
                 MapScriptMethods.startScript_FirstUser(chr.getClient(), this.onFirstUserEnter);
             }
-            if (ServerConstants.封包显示 || 进入地图开启显示数据) {
+            if (ServerConstants.PACKET_DISPLAY || 进入地图开启显示数据) {
                 System.out.println("进入地图加载数据D");
             }
             switch (this.mapid) {
@@ -1870,7 +1870,7 @@ public class MapleMap
                 pet.setPos(chr.getTruePosition());
                 chr.getClient().getSession().write(PetPacket.updatePet(pet, chr.getInventory(MapleInventoryType.CASH).getItem((byte)pet.getInventoryPosition()), true));
                 this.broadcastMessage(chr, PetPacket.showPet(chr, pet, false, false), false);
-                if (!ServerConstants.封包显示 && !进入地图开启显示数据) {
+                if (!ServerConstants.PACKET_DISPLAY && !进入地图开启显示数据) {
                     continue;
                 }
                 System.out.println("进入地图加载数据F");
@@ -1907,7 +1907,7 @@ public class MapleMap
             finally {
                 chr.unlockSummonsReadLock();
             }
-            if (ServerConstants.封包显示 || 进入地图开启显示数据) {
+            if (ServerConstants.PACKET_DISPLAY || 进入地图开启显示数据) {
                 System.out.println("进入地图加载数据H");
             }
         }
@@ -1917,47 +1917,47 @@ public class MapleMap
         this.broadcastMessage(MaplePacketCreator.loveEffect());
         if (this.timeLimit > 0 && this.getForcedReturnMap() != null && !chr.isClone()) {
             chr.startMapTimeLimitTask(this.timeLimit, this.getForcedReturnMap());
-            if (ServerConstants.封包显示 || 进入地图开启显示数据) {
+            if (ServerConstants.PACKET_DISPLAY || 进入地图开启显示数据) {
                 System.out.println("进入地图加载数据I");
             }
         }
         if (this.getSquadBegin() != null && this.getSquadBegin().getTimeLeft() > 0L && this.getSquadBegin().getStatus() == 1) {
             chr.getClient().getSession().write(MaplePacketCreator.getClock((int)(this.getSquadBegin().getTimeLeft() / 1000L)));
-            if (ServerConstants.封包显示 || 进入地图开启显示数据) {
+            if (ServerConstants.PACKET_DISPLAY || 进入地图开启显示数据) {
                 System.out.println("进入地图加载数据O");
             }
         }
         if (chr.getCarnivalParty() != null && chr.getEventInstance() != null) {
             chr.getClient().getSession().write(chr.getCoconutTeam());
             chr.getEventInstance().onMapLoad(chr);
-            if (ServerConstants.封包显示 || 进入地图开启显示数据) {
+            if (ServerConstants.PACKET_DISPLAY || 进入地图开启显示数据) {
                 System.out.println("进入地图加载数据M");
             }
         }
         MapleEvent.mapLoad(chr, this.channel);
         if (chr.getEventInstance() != null && chr.getEventInstance().isTimerStarted() && !chr.isClone()) {
             chr.getClient().getSession().write(MaplePacketCreator.getClock((int)(chr.getEventInstance().getTimeLeft() / 1000L)));
-            if (ServerConstants.封包显示 || 进入地图开启显示数据) {
+            if (ServerConstants.PACKET_DISPLAY || 进入地图开启显示数据) {
                 System.out.println("进入地图加载数据K");
             }
         }
         if (this.hasClock()) {
             final Calendar cal = Calendar.getInstance();
             chr.getClient().getSession().write(MaplePacketCreator.getClockTime(cal.get(11), cal.get(12), cal.get(13)));
-            if (ServerConstants.封包显示 || 进入地图开启显示数据) {
+            if (ServerConstants.PACKET_DISPLAY || 进入地图开启显示数据) {
                 System.out.println("进入地图加载数据L");
             }
         }
         if (this.isTown()) {
             chr.cancelEffectFromBuffStat(MapleBuffStat.RAINING_MINES);
-            if (ServerConstants.封包显示 || 进入地图开启显示数据) {
+            if (ServerConstants.PACKET_DISPLAY || 进入地图开启显示数据) {
                 System.out.println("进入地图加载数据W-------------完");
             }
         }
         if (chr.getParty() != null && !chr.isClone()) {
             chr.receivePartyMemberHP();
             chr.updatePartyMemberHP();
-            if (ServerConstants.封包显示 || 进入地图开启显示数据) {
+            if (ServerConstants.PACKET_DISPLAY || 进入地图开启显示数据) {
                 System.out.println("进入地图加载数据G");
             }
         }
@@ -3516,18 +3516,18 @@ public class MapleMap
     }
     
     public boolean isPvpMap() {
-        final int 个人PK地图 = LoginServer.个人PK地图();
-        return this.mapid == 个人PK地图;
+        final int personPVP = LoginServer.getPersonPVP();
+        return this.mapid == personPVP;
     }
     
     public boolean isPartyPvpMap() {
-        final int 组队PK地图 = LoginServer.组队PK地图();
-        return this.mapid == 组队PK地图;
+        final int teamPVP = LoginServer.getTeamPVP();
+        return this.mapid == teamPVP;
     }
     
     public boolean isGuildPvpMap() {
-        final int 家族PK地图 = LoginServer.家族PK地图();
-        return this.mapid == 家族PK地图;
+        final int familyPVP = LoginServer.getFamilyPVP();
+        return this.mapid == familyPVP;
     }
     
     public boolean isBossMap() {

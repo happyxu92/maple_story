@@ -86,9 +86,9 @@ public class MapleLifeFactory
         }
         catch (SQLException ex) {
             System.out.println("Failed to load npc name data. " + ex);
-            FileoutputUtil.outputFileError("logs/数据库异常.txt", ex);
+            FileoutputUtil.outputFileError("Logs/mysqlException.txt", ex);
         }
-        System.out.println("共加载NPC：" + MapleLifeFactory.npcNames.size());
+        System.out.println("Loaded NPC：" + MapleLifeFactory.npcNames.size());
     }
     
     public static List<Integer> getQuestCount(final int id) {

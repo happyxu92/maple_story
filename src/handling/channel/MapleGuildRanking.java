@@ -78,7 +78,7 @@ public class MapleGuildRanking
             rs.close();
         }
         catch (SQLException e) {
-            System.err.println("家族排行错误" + e);
+            System.err.println("Guilds Ranking Exception" + e);
         }
     }
     
@@ -124,7 +124,7 @@ public class MapleGuildRanking
             rs.close();
         }
         catch (SQLException e) {
-            System.err.println("人物排行错误");
+            System.err.println("Characters Ranking Excepting! e=" + e);
         }
     }
     
@@ -140,7 +140,7 @@ public class MapleGuildRanking
             rs.close();
         }
         catch (SQLException e) {
-            System.err.println("金币排行错误");
+            System.err.println("Meso Ranking Exception! e=" + e);
         }
     }
     

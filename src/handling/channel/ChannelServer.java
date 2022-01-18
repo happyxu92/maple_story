@@ -322,7 +322,7 @@ public class ChannelServer implements Serializable
             this.acceptor.setHandler(new MapleServerHandler(this.channel, false));
             this.acceptor.bind(new InetSocketAddress(this.port));
             ((SocketSessionConfig)this.acceptor.getSessionConfig()).setTcpNoDelay(true);
-            System.out.println("频道 " + this.channel + ": 启动端口 " + this.port + ": 服务器IP " + this.ip + "");
+            System.out.println("Chanel " + this.channel + ": Port " + this.port + ": server IP " + this.ip + "");
             this.eventSM.init();
         }
         catch (IOException e2) {

@@ -13,7 +13,6 @@ import tools.HexTool;
 import tools.MapleAESOFB;
 import tools.MapleCustomEncryption;
 import tools.data.input.ByteArrayByteStream;
-import tools.data.input.ByteInputStream;
 import tools.data.input.GenericLittleEndianAccessor;
 
 public class MaplePacketDecoder extends CumulativeProtocolDecoder
@@ -49,7 +48,7 @@ public class MaplePacketDecoder extends CumulativeProtocolDecoder
             client.getReceiveCrypto().crypt(decryptedPacket);
             MapleCustomEncryption.decryptData(decryptedPacket);
             out.write(decryptedPacket);
-            if (ServerConstants.封包显示) {
+            if (ServerConstants.PACKET_DISPLAY) {
                 final int packetLen = decryptedPacket.length;
                 final int pHeader = this.readFirstShort(decryptedPacket);
                 final String pHeaderStr = Integer.toHexString(pHeader).toUpperCase();

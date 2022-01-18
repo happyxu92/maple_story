@@ -27,7 +27,7 @@ public class SkillFactory
         if (SkillFactory.skills.size() != 0) {
             return SkillFactory.skills.get(id);
         }
-        System.out.println("加载 技能完成 :::");
+        System.out.println("Loading skill completed!");
         final MapleDataProvider datasource = MapleDataProviderFactory.getDataProvider(new File(System.getProperty("wzPath") + "/Skill.wz"));
         final MapleDataDirectoryEntry root = datasource.getRoot();
         for (final MapleDataFileEntry topDir : root.getFiles()) {

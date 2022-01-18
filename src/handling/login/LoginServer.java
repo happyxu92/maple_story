@@ -8,13 +8,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import org.apache.mina.core.buffer.IoBuffer;
-import org.apache.mina.core.buffer.IoBufferAllocator;
 import org.apache.mina.core.buffer.SimpleBufferAllocator;
-import org.apache.mina.core.filterchain.IoFilter;
 import org.apache.mina.core.service.IoAcceptor;
-import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.session.IoSession;
-import org.apache.mina.filter.codec.ProtocolCodecFactory;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.SocketSessionConfig;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
@@ -33,9 +29,9 @@ public class LoginServer
     public static int maxCharacters;
     public static int userLimit;
     public static int usersOn;
-    public static int 个人PK地图;
-    public static int 组队PK地图;
-    public static int 家族PK地图;
+    public static int personPVP;
+    public static int teamPVP;
+    public static int familyPVP;
     private static boolean finishedShutdown;
     private static boolean adminOnly;
     private static final HashMap<Integer, Triple<String, String, Integer>> loginAuth;
@@ -76,16 +72,16 @@ public class LoginServer
     }
     
     public static void run_startup_configurations() {
-        LoginServer.userLimit = Integer.valueOf(ServerProperties.getProperty("RoyMS.userLimit"));
+        LoginServer.userLimit = Integer.parseInt(ServerProperties.getProperty("RoyMS.userLimit"));
         LoginServer.serverName = ServerProperties.getProperty("RoyMS.ServerName");
         LoginServer.eventMessage = ServerProperties.getProperty("RoyMS.EventMessage");
         LoginServer.flag = Byte.parseByte(ServerProperties.getProperty("RoyMS.Flag"));
         LoginServer.PORT = Integer.parseInt(ServerProperties.getProperty("RoyMS.LPort"));
         LoginServer.adminOnly = Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.Admin", "false"));
         LoginServer.maxCharacters = Integer.parseInt(ServerProperties.getProperty("RoyMS.MaxCharacters"));
-        LoginServer.个人PK地图 = Integer.parseInt(ServerProperties.getProperty("RoyMS.personPVP"));
-        LoginServer.组队PK地图 = Integer.parseInt(ServerProperties.getProperty("RoyMS.teamPVP"));
-        LoginServer.家族PK地图 = Integer.parseInt(ServerProperties.getProperty("RoyMS.familyPVP"));
+        LoginServer.personPVP = Integer.parseInt(ServerProperties.getProperty("RoyMS.personPVP"));
+        LoginServer.teamPVP = Integer.parseInt(ServerProperties.getProperty("RoyMS.teamPVP"));
+        LoginServer.familyPVP = Integer.parseInt(ServerProperties.getProperty("RoyMS.familyPVP"));
         IoBuffer.setUseDirectBuffer(false);
         IoBuffer.setAllocator(new SimpleBufferAllocator());
         LoginServer.acceptor = new NioSocketAcceptor();
@@ -94,7 +90,7 @@ public class LoginServer
         ((SocketSessionConfig)LoginServer.acceptor.getSessionConfig()).setTcpNoDelay(true);
         try {
             LoginServer.acceptor.bind(new InetSocketAddress(LoginServer.PORT));
-            System.out.println("登录服务器 : 启动端口 " + LoginServer.PORT);
+            System.out.println("Login Server: Login Port " + LoginServer.PORT);
         }
         catch (IOException e) {
             System.err.println("Binding to port " + LoginServer.PORT + " failed" + e);
@@ -170,16 +166,16 @@ public class LoginServer
         LoginServer.finishedShutdown = false;
     }
     
-    public static int 个人PK地图() {
-        return LoginServer.个人PK地图;
+    public static int getPersonPVP() {
+        return LoginServer.personPVP;
     }
     
-    public static int 组队PK地图() {
-        return LoginServer.组队PK地图;
+    public static int getTeamPVP() {
+        return LoginServer.teamPVP;
     }
     
-    public static int 家族PK地图() {
-        return LoginServer.家族PK地图;
+    public static int getFamilyPVP() {
+        return LoginServer.familyPVP;
     }
     
     public static final void closeConn(final String ip) {

@@ -40,7 +40,6 @@ import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
@@ -50,7 +49,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import javax.management.InstanceAlreadyExistsException;
-import javax.management.JMException;
 import javax.management.MBeanRegistrationException;
 import javax.management.MBeanServer;
 import javax.management.MalformedObjectNameException;
@@ -566,7 +564,7 @@ public class MapleServerHandler extends IoHandlerAdapter implements MapleServerH
             }
             case CHANGE_MAP: {
                 if (cs) {
-                    if (ServerConstants.调试输出封包) {
+                    if (ServerConstants.DEBUG_OUTPUT_PACKER) {
                         System.out.println("退出商城");
                     }
                     CashShopOperation.LeaveCS(slea, c, c.getPlayer());

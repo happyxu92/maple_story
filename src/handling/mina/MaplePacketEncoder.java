@@ -16,7 +16,6 @@ import tools.HexTool;
 import tools.MapleAESOFB;
 import tools.MapleCustomEncryption;
 import tools.data.input.ByteArrayByteStream;
-import tools.data.input.ByteInputStream;
 import tools.data.input.GenericLittleEndianAccessor;
 
 public class MaplePacketEncoder implements ProtocolEncoder
@@ -28,7 +27,7 @@ public class MaplePacketEncoder implements ProtocolEncoder
         if (client != null) {
             final MapleAESOFB send_crypto = client.getSendCrypto();
             final byte[] inputInitialPacket = ((MaplePacket)message).getBytes();
-            if (ServerConstants.封包显示) {
+            if (ServerConstants.PACKET_DISPLAY) {
                 final int packetLen = inputInitialPacket.length;
                 final int pHeader = this.readFirstShort(inputInitialPacket);
                 final String pHeaderStr = Integer.toHexString(pHeader).toUpperCase();

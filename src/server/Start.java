@@ -57,7 +57,7 @@ public class Start
         System.setProperty("server_property_fish_path", homePath + "fish.properties");
         System.setProperty("wzPath", wzPath);
         System.setProperty("scripts_path", scriptsPath);
-        System.setProperty("server_name", "寻梦");
+        System.setProperty("server_name", "Happy");
         OtherSettings.getInstance();
         Start.instance.run();
     }
@@ -66,10 +66,10 @@ public class Start
         final long start = System.currentTimeMillis();
         checkSingleInstance();
         if (Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.Admin"))) {
-            printSection("[!!! 已开启只能管理员登录模式 !!!]");
+            printSection("Admin login only!");
         }
         if (Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.AutoRegister"))) {
-            System.out.println("加载 自动注册完成 :::");
+            System.out.println("Load auto register...");
         }
         try {
             try (final PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("UPDATE accounts SET loggedin = 0")) {
@@ -80,107 +80,109 @@ public class Start
             }
         }
         catch (SQLException ex) {
-            throw new RuntimeException("[数据库异常] 请检查数据库链接。目前无法连接到MySQL数据库.");
+            throw new RuntimeException("[Database Exception] can not connect to MySQL!");
         }
-        System.out.println("服务端 开始启动...版本号：079H3 2020-10-13");
-        System.out.println("当前操作系统: " + System.getProperty("sun.desktop"));
-        System.out.println("服务器地址: " + ServerProperties.getProperty("RoyMS.IP") + ":" + LoginServer.PORT);
-        System.out.println("游戏版本: " + ServerConstants.MAPLE_TYPE + " v." + ServerConstants.MAPLE_VERSION + "." + ServerConstants.MAPLE_PATCH);
-        System.out.println("主服务器: 蓝蜗牛");
+        System.out.println("Server start init... version:079H3");
+        System.out.println("Current operation system: " + System.getProperty("sun.desktop"));
+        System.out.println("ServerIp: " + ServerProperties.getProperty("RoyMs.IP") + ":" + LoginServer.PORT);
+        System.out.println("Game version: " + ServerConstants.MAPLE_TYPE + " v." +
+                ServerConstants.MAPLE_VERSION + "." + ServerConstants.MAPLE_PATCH);
         World.init();
         runThread();
         loadData();
-        System.out.print("加载\"登入\"服务...");
+        System.out.println("Loading login service");
         LoginServer.run_startup_configurations();
-        System.out.println("正在加载频道...");
+        System.out.println("Loading channel...");
         ChannelServer.startChannel_Main();
-        System.out.println("频道加载完成!\r\n");
-        System.out.print("正在加载商城...");
+        System.out.println("Loading channel completed!\r\n");
+        System.out.print("Loading cash shop...");
         CashShopServer.run_startup_configurations();
-        printSection("刷怪线程");
+        printSection("Starting Respawn Thread");
         World.registerRespawn();
         Timer.CheatTimer.getInstance().register(AutobanManager.getInstance(), 60000L);
         onlineTime(1);
         memoryRecical(10);
         MapleServerHandler.registerMBean();
         LoginServer.setOn();
-        System.out.println("\r\n经验倍率：" + Integer.parseInt(ServerProperties.getProperty("RoyMS.Exp")) + "  物品倍率：" + Integer.parseInt(ServerProperties.getProperty("RoyMS.Drop")) + "  金币倍率：" + Integer.parseInt(ServerProperties.getProperty("RoyMS.Meso")) + "  BOSS爆率：" + Integer.parseInt(ServerProperties.getProperty("RoyMS.BDrop")));
-        if (Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.检测复制装备", "false"))) {
+        System.out.println("\r\nExpRate:" + Integer.parseInt(ServerProperties.getProperty("RoyMS.Exp"))
+                + "  Drop Rate:" + Integer.parseInt(ServerProperties.getProperty("RoyMS.Drop"))
+                + "  Meso Rate:" + Integer.parseInt(ServerProperties.getProperty("RoyMS.Meso"))
+                + "  Boss Rate" + Integer.parseInt(ServerProperties.getProperty("RoyMS.BDrop")));
+        if (Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.checkRepeatEqu", "false"))) {
             checkCopyItemFromSql();
         }
-        if (Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.防万能检测", "false"))) {
-            System.out.println("启动防万能检测");
+        if (Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.chekCharacterConnection", "false"))) {
+            System.out.println("Check all power");
             startCheck();
         }
         final long now = System.currentTimeMillis() - start;
         final long seconds = now / 1000L;
         final long ms = now % 1000L;
-        System.out.println("加载完成, 耗时: " + seconds + "秒" + ms + "毫秒\r\n");
-//        CashGui();
-        Boolean loadGui = Boolean.valueOf(ServerProperties.getProperty("RoyMS.loadGui","false"));
+        System.out.println("Loading completed, cost:" + seconds + "s, " + ms + "ms\r\n");
+        boolean loadGui = Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.loadGui", "false"));
         if(loadGui){
-            System.out.println("加载GUI工具");
+            System.out.println("Loading GUI tool");
             CashGui();
         }
     }
     
     public static void runThread() {
-        System.out.print("\r\n正在加载线程");
+        System.out.println("\r\nStart loading thread");
         Timer.WorldTimer.getInstance().start();
         Timer.EtcTimer.getInstance().start();
         Timer.MapTimer.getInstance().start();
         Timer.MobTimer.getInstance().start();
         Timer.CloneTimer.getInstance().start();
         Timer.CheatTimer.getInstance().start();
-        System.out.print(".");
+        System.out.print("...");
         Timer.EventTimer.getInstance().start();
         Timer.BuffTimer.getInstance().start();
         Timer.TimerManager.getInstance().start();
         Timer.PingTimer.getInstance().start();
         Timer.PGTimer.getInstance().start();
-        System.out.println("完成!\r\n");
+        System.out.println("Completed!\r\n");
     }
     
     public static void loadData() {
-        System.out.println("载入数据(因为数据量大可能比较久而且内存消耗会飙升)");
-        System.out.println("加载等级经验数据");
+        System.out.println("Loading data...be patient...");
+        System.out.println("Loading exp data...");
         GameConstants.LoadExp();
-        System.out.println("加载排名信息数据");
+        System.out.println("Loading rank data...");
         MapleGuildRanking.getInstance().RankingUpdate();
-        System.out.println("加载公会数据并清理不存在公会");
+        System.out.println("Loading Guild, remove not exist guild...");
         MapleGuild.loadAll();
-        System.out.println("加载任务数据");
+        System.out.println("Loading Quests...");
         MapleQuest.initQuests();
         MapleLifeFactory.loadQuestCounts();
-        System.out.println("加载爆物数据");
+        System.out.println("Loading retrieve global...");
         MapleMonsterInformationProvider.getInstance().retrieveGlobal();
-        System.out.println("加载脏话检测系统");
+        System.out.println("Loading language test system...");
         LoginInformationProvider.getInstance();
-        System.out.println("加载道具数据");
+        System.out.println("Loading item data...");
         ItemMakerFactory.getInstance();
         MapleItemInformationProvider.getInstance().load();
-        System.out.println("加载技能数据");
+        System.out.println("Loading skill data...");
         SkillFactory.getSkill(99999999);
         MobSkillFactory.getInstance();
         MapleFamilyBuff.getBuffEntry();
-        System.out.println("加载SpeedRunner");
+        System.out.println("Loading SpeedRunner");
         Runtime.getRuntime().addShutdownHook(new Thread(new Shutdown()));
         try {
             SpeedRunner.getInstance().loadSpeedRuns();
         }
         catch (SQLException e) {
-            System.out.println("SpeedRunner错误:" + e);
+            System.out.println("SpeedRunner Exception=" + e);
         }
-        System.out.println("加载随机奖励系统");
+        System.out.println("Loading random reward system...");
         RandomRewards.getInstance();
-        System.out.println("加载0X问答系统");
+        System.out.println("Loading ox quiz data...");
         MapleOxQuizFactory.getInstance().initialize();
-        System.out.println("加载嘉年华数据");
+        System.out.println("Loading Carnival data...");
         MapleCarnivalFactory.getInstance();
-        System.out.println("加载角色类排名数据");
-        System.out.println("加载商城道具数据，数据较为庞大，请耐心等待");
-        CashItemFactory.getInstance().initialize();
+        System.out.println("Loading customLife");
         MapleMapFactory.loadCustomLife();
+        System.out.println("Loading cash item data...");
+        CashItemFactory.getInstance().initialize();
     }
     
     public static void 自动存档(final int time) {
@@ -207,7 +209,7 @@ public class Start
 
     //在线时间
     public static void onlineTime(final int time) {
-        System.out.println("服务端启用在线时间统计." + time + "分钟记录一次在线时间.");
+        System.out.println("Record characters' online time once " + time + " minute!");
         Timer.WorldTimer.getInstance().register(new Runnable() {
             @Override
             public void run() {
@@ -345,7 +347,7 @@ public class Start
         MapleServerHandler.registerMBean();
         LoginServer.setOn();
         System.out.println("\r\n经验倍率：" + Integer.parseInt(ServerProperties.getProperty("RoyMS.Exp")) + "  物品倍率：" + Integer.parseInt(ServerProperties.getProperty("RoyMS.Drop")) + "  金币倍率：" + Integer.parseInt(ServerProperties.getProperty("RoyMS.Meso")) + "  BOSS爆率：" + Integer.parseInt(ServerProperties.getProperty("RoyMS.BDrop")));
-        if (Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.检测复制装备", "false"))) {
+        if (Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.checkRepeatEqu", "false"))) {
             checkCopyItemFromSql();
         }
         if (Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.防万能检测", "false"))) {
@@ -400,7 +402,7 @@ public class Start
     }
     
     public static void startCheck() {
-        System.out.println("服务端启用检测.30秒检测一次角色是否与登录器断开连接.");
+        System.out.println("Check character connection once 30 seconds!");
         Timer.WorldTimer.getInstance().register(new Runnable() {
             @Override
             public void run() {

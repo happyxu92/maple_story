@@ -280,7 +280,7 @@ public class World
     
     public static void registerRespawn() {
         Timer.WorldTimer.getInstance().register(new Respawn(), 5000L);
-        System.out.println("[刷怪线程] 已经启动...");
+        System.out.println("[Respawn] completed!");
     }
     
     public static void handleMap(final MapleMap map, final int numTimes, final int size) {
@@ -1003,7 +1003,7 @@ public class World
         static {
             guilds = new LinkedHashMap<Integer, MapleGuild>();
             Guild.lock = new ReentrantReadWriteLock();
-            System.out.println("加载 家族 :::");
+            System.out.println("Load Guild...");
             final Collection<MapleGuild> allGuilds = MapleGuild.loadAll();
             for (final MapleGuild g : allGuilds) {
                 if (g.isProper()) {
@@ -1441,7 +1441,7 @@ public class World
         static {
             alliances = new LinkedHashMap<Integer, MapleGuildAlliance>();
             Alliance.lock = new ReentrantReadWriteLock();
-            System.out.println("加载 家族联盟 :::");
+            System.out.println("Load GuildAlliance...");
             final Collection<MapleGuildAlliance> allGuilds = MapleGuildAlliance.loadAll();
             for (final MapleGuildAlliance g : allGuilds) {
                 Alliance.alliances.put(g.getId(), g);
@@ -1556,7 +1556,7 @@ public class World
         static {
             families = new LinkedHashMap<Integer, MapleFamily>();
             Family.lock = new ReentrantReadWriteLock();
-            System.out.println("加载 冒险学院 :::");
+            System.out.println("Load Families...");
             final Collection<MapleFamily> allGuilds = MapleFamily.loadAll();
             for (final MapleFamily g : allGuilds) {
                 if (g.isProper()) {

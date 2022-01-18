@@ -28,7 +28,7 @@ public class RandomRewards
         this.compiledEventC = null;
         this.compiledEventB = null;
         this.compiledEventA = null;
-        System.out.println("加载 随机奖励 :::");
+        System.out.println("Loading random reward...");
         List<Integer> returnArray = new ArrayList<Integer>();
         this.processRewards(returnArray, GameConstants.goldrewards);
         this.compiledGold = returnArray;

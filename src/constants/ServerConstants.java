@@ -15,9 +15,9 @@ public class ServerConstants
     public static int MTS_TAX;
     public static int MTS_MESO;
     public static int CHANNEL_COUNT;
-    public static boolean 封包显示;
-    public static boolean 调试输出封包;
-    public static boolean 自动注册;
+    public static boolean PACKET_DISPLAY;
+    public static boolean DEBUG_OUTPUT_PACKER;
+    public static boolean AUTO_REGISTER;
     public static boolean PACKET_ERROR_OFF;
     public static boolean Super_password;
     public static boolean clientAutoDisconnect;
@@ -52,12 +52,12 @@ public class ServerConstants
     }
     
     public static boolean getAutoReg() {
-        return ServerConstants.自动注册;
+        return ServerConstants.AUTO_REGISTER;
     }
     
     public static String ChangeAutoReg() {
-        ServerConstants.自动注册 = !getAutoReg();
-        return ServerConstants.自动注册 ? "开启" : "关闭";
+        ServerConstants.AUTO_REGISTER = !getAutoReg();
+        return ServerConstants.AUTO_REGISTER ? "开启" : "关闭";
     }
     
     public static byte Class_Bonus_EXP(final int job) {
@@ -87,7 +87,7 @@ public class ServerConstants
         ServerConstants.PollEnabled = false;
         ServerConstants.Poll_Question = "Are you mudkiz?";
         ServerConstants.Poll_Answers = new String[] { "test1", "test2", "test3" };
-        ServerConstants.MAPLE_TYPE = MapleType.中国;
+        ServerConstants.MAPLE_TYPE = MapleType.CHINA;
         ServerConstants.MAPLE_VERSION = 79;
         ServerConstants.MAPLE_PATCH = "1";
         ServerConstants.Use_Fixed_IV = false;
@@ -96,10 +96,10 @@ public class ServerConstants
         ServerConstants.MTS_TAX = 10;
         ServerConstants.MTS_MESO = 5000;
         ServerConstants.CHANNEL_COUNT = 200;
-        ServerConstants.封包显示 = Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.封包显示", "false"));
-        ServerConstants.调试输出封包 = Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.调试输出封包", "false"));
-        ServerConstants.自动注册 = Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.AutoRegister", "false"));
-        ServerConstants.PACKET_ERROR_OFF = Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.记录38错误", "false"));
+        ServerConstants.PACKET_DISPLAY = Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.PACKER_DISPLAY", "false"));
+        ServerConstants.DEBUG_OUTPUT_PACKER = Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.DEBUG_OUTPUT_PACKET", "false"));
+        ServerConstants.AUTO_REGISTER = Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.AutoRegister", "false"));
+        ServerConstants.PACKET_ERROR_OFF = Boolean.parseBoolean(ServerProperties.getProperty("RoyMS.PACKET_ERROR_OFF", "false"));
         ServerConstants.Super_password = false;
         ServerConstants.clientAutoDisconnect = true;
         ServerConstants.superpw = "";
@@ -151,7 +151,7 @@ public class ServerConstants
     
     public enum MapleType
     {
-        中国(4, "GB18030");
+        CHINA(4, "GB18030");
         
         final byte type;
         final String ascii;
@@ -175,7 +175,7 @@ public class ServerConstants
                     return l;
                 }
             }
-            return MapleType.中国;
+            return MapleType.CHINA;
         }
     }
 }

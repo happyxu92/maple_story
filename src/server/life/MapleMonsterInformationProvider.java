@@ -41,7 +41,10 @@ public class MapleMonsterInformationProvider
             ps = con.prepareStatement("SELECT * FROM drop_data_global WHERE chance > 0");
             rs = ps.executeQuery();
             while (rs.next()) {
-                this.globaldrops.add(new MonsterGlobalDropEntry(rs.getInt("itemid"), rs.getInt("chance"), rs.getInt("continent"), rs.getByte("dropType"), rs.getInt("minimum_quantity"), rs.getInt("maximum_quantity"), rs.getShort("questid")));
+                this.globaldrops.add(new MonsterGlobalDropEntry(rs.getInt("itemid"),
+                        rs.getInt("chance"), rs.getInt("continent"),
+                        rs.getByte("dropType"), rs.getInt("minimum_quantity"),
+                        rs.getInt("maximum_quantity"), rs.getShort("questid")));
             }
             rs.close();
             ps.close();

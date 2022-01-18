@@ -776,7 +776,7 @@ public class MapleStatEffect implements Serializable
             }
         }
         final List<Pair<MapleStat, Integer>> hpmpupdate = new ArrayList<Pair<MapleStat, Integer>>(2);
-        if (applyto.getMapId() != LoginServer.家族PK地图() || applyto.getMapId() != LoginServer.个人PK地图() || applyto.getMapId() != LoginServer.组队PK地图()) {
+        if (applyto.getMapId() != LoginServer.getFamilyPVP() || applyto.getMapId() != LoginServer.getPersonPVP() || applyto.getMapId() != LoginServer.getTeamPVP()) {
             if (hpchange != 0) {
                 if (hpchange < 0 && -hpchange > applyto.getHp() && !applyto.hasDisease(MapleDisease.ZOMBIFY)) {
                     return false;
