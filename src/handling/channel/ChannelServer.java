@@ -64,6 +64,7 @@ public class ChannelServer implements Serializable
     private int dropRate;
     private int cashRate;
     private int BossdropRate;
+    private int equRate;
     private int doubleExp;
     private int doubleMeso;
     private int doubleDrop;
@@ -286,6 +287,7 @@ public class ChannelServer implements Serializable
             this.mesoRate = Integer.parseInt(ServerProperties.getProperty("RoyMS.Meso"));
             this.dropRate = Integer.parseInt(ServerProperties.getProperty("RoyMS.Drop"));
             this.BossdropRate = Integer.parseInt(ServerProperties.getProperty("RoyMS.BDrop"));
+            this.equRate = Integer.parseInt(ServerProperties.getProperty("RoyMS.EquDrop"));
             this.cashRate = Integer.parseInt(ServerProperties.getProperty("RoyMS.Cash"));
             this.serverMessage = ServerProperties.getProperty("RoyMS.EventMessage");
             this.serverName = ServerProperties.getProperty("RoyMS.ServerName");
@@ -451,6 +453,10 @@ public class ChannelServer implements Serializable
     
     public int getBossDropRate() {
         return this.BossdropRate;
+    }
+
+    public int getEquDropRate() {
+        return this.equRate;
     }
     
     public void setBossDropRate(final int dropRate) {

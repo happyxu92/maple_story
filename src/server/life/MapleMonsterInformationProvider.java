@@ -79,9 +79,6 @@ public class MapleMonsterInformationProvider
             while (rs.next()) {
                 final int itemid = rs.getInt("itemid");
                 int chance = rs.getInt("chance");
-                if (GameConstants.getInventoryType(itemid) == MapleInventoryType.EQUIP) {
-                    chance /= 3;
-                }
                 ret.add(new MonsterDropEntry(itemid, chance, rs.getInt("minimum_quantity"), rs.getInt("maximum_quantity"), rs.getShort("questid")));
             }
             try {

@@ -472,6 +472,7 @@ public class MapleMap
         final int mobpos = mob.getPosition().x;
         final int cmServerrate = ChannelServer.getInstance(this.channel).getMesoRate();
         int chServerrate = ChannelServer.getInstance(this.channel).getDropRate();
+        int equDropRate = ChannelServer.getInstance(this.channel).getEquDropRate();
         final int caServerrate = ChannelServer.getInstance(this.channel).getCashRate();
         byte d = 1;
         final Point pos = new Point(0, mob.getPosition().y);
@@ -496,7 +497,8 @@ public class MapleMap
             final int part3 = chr.getDropMod();
             final int part4 = (int)(chr.getStat().dropBuff / 100.0);
             final int part5 = (int)(showdown / 100.0);
-            final int last = part1 * part2 * part3 * part4 * part5;
+            final int part6 = GameConstants.getInventoryType(de.itemId) == MapleInventoryType.EQUIP ? equDropRate : 1;
+            final int last = part1 * part2 * part3 * part4 * part5 * part6;
             if (Rand >= last) {
                 continue;
             }
