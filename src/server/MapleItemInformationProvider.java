@@ -981,39 +981,41 @@ public class MapleItemInformationProvider {
         if (defaultValue == 0) {
             return 0;
         }
-        int maxRange = 5;
-        double defaultMaxRange = 0.1;
-        final int tmp = MapleItemInformationProvider.rand.nextInt(1200);
-        if (tmp >= 1199) {
-            maxRange = 100;
-            defaultMaxRange = 2.0;
-        } else if (tmp >= 1099) {
-            maxRange = 80;
-            defaultMaxRange = 1.7;
-        } else if (tmp >= 999) {
-            maxRange = 65;
-            defaultMaxRange = 1.5;
-        } else if (tmp >= 960) {
-            maxRange = 55;
-            defaultMaxRange = 1.3;
-        } else if (tmp >= 930) {
-            maxRange = 45;
-            defaultMaxRange = 1.0;
-        } else if (tmp >= 850) {
-            maxRange = 35;
-            defaultMaxRange = 0.8;
-        } else if (tmp >= 706) {
-            maxRange = 25;
-            defaultMaxRange = 0.6;
-        } else if (tmp >= 386) {
-            maxRange = 15;
-            defaultMaxRange = 0.4;
-        } else {
-            maxRange = 10;
-            defaultMaxRange = 0.2;
-        }
-        final int lMaxRange = (int) Math.min(Math.ceil(defaultValue * defaultMaxRange), maxRange);
-        return (short) (defaultValue - lMaxRange + Math.floor(Math.random() * (lMaxRange * 2 + 1)));
+        int maxRange = 15;
+        final int tmp = MapleItemInformationProvider.rand.nextInt(maxRange);
+        return  (short) (defaultValue + tmp);
+//        double defaultMaxRange = 0.1;
+//        final int tmp = MapleItemInformationProvider.rand.nextInt(1200);
+//        if (tmp >= 1199) {
+//            maxRange = 100;
+//            defaultMaxRange = 2.0;
+//        } else if (tmp >= 1099) {
+//            maxRange = 80;
+//            defaultMaxRange = 1.7;
+//        } else if (tmp >= 999) {
+//            maxRange = 65;
+//            defaultMaxRange = 1.5;
+//        } else if (tmp >= 960) {
+//            maxRange = 55;
+//            defaultMaxRange = 1.3;
+//        } else if (tmp >= 930) {
+//            maxRange = 45;
+//            defaultMaxRange = 1.0;
+//        } else if (tmp >= 850) {
+//            maxRange = 35;
+//            defaultMaxRange = 0.8;
+//        } else if (tmp >= 706) {
+//            maxRange = 25;
+//            defaultMaxRange = 0.6;
+//        } else if (tmp >= 386) {
+//            maxRange = 15;
+//            defaultMaxRange = 0.4;
+//        } else {
+//            maxRange = 10;
+//            defaultMaxRange = 0.2;
+//        }
+//        final int lMaxRange = (int) Math.min(Math.ceil(defaultValue * defaultMaxRange), maxRange);
+//        return (short) (defaultValue - lMaxRange + Math.floor(Math.random() * (lMaxRange * 2 + 1)));
     }
 
     public Equip randomizeStats(final Equip equip) {
