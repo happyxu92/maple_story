@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import server.Randomizer;
+import server.ServerProperties;
 import server.maps.MapleMapObjectType;
 
 public class GameConstants
@@ -43,6 +44,7 @@ public class GameConstants
     public static int[] superDrops;
     public static int[] owlItems;
     public static final String[] stats;
+    public static int questExpRate = 1;
     
     public static void LoadExp() {
         for (int i = 1; i <= 50; ++i) {
@@ -56,6 +58,8 @@ public class GameConstants
         for (int i = 51; i <= 200; ++i) {
             GameConstants.exp[i] = (int)(GameConstants.exp[i - 1] * 1.0548);
         }
+
+        setExpRate_Quest(Integer.parseInt(ServerProperties.getProperty("RoyMS.QuestExp")));
     }
     
     public static int getExpNeededForLevel(final int level) {
@@ -1829,7 +1833,11 @@ public class GameConstants
     }
     
     public static int getExpRate_Quest(final int level) {
-        return 1;
+        return GameConstants.questExpRate;
+    }
+
+    public static void setExpRate_Quest(int rate) {
+        GameConstants.questExpRate = rate;
     }
     
     public static String getCashBlockedMsg(final int id) {

@@ -105,6 +105,7 @@ public class Start
         MapleServerHandler.registerMBean();
         LoginServer.setOn();
         System.out.println("\r\nExpRate:" + Integer.parseInt(ServerProperties.getProperty("RoyMS.Exp"))
+                + "  QuestExpRate:" + Integer.parseInt(ServerProperties.getProperty("RoyMS.QuestExp"))
                 + "  Drop Rate:" + Integer.parseInt(ServerProperties.getProperty("RoyMS.Drop"))
                 + "  Meso Rate:" + Integer.parseInt(ServerProperties.getProperty("RoyMS.Meso"))
                 + "  Boss Rate" + Integer.parseInt(ServerProperties.getProperty("RoyMS.BDrop")));
