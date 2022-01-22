@@ -10,7 +10,8 @@ log/*
 logs/*
 
 # config file
-./config/source
+config/*
+start.sh
 
 # BlueJ files
 *.ctxt
@@ -19,7 +20,7 @@ logs/*
 .mtj.tmp/
 
 # Package Files #
-#*.jar
+*.jar
 *.war
 *.nar
 *.ear
