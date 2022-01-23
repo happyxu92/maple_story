@@ -25,6 +25,7 @@ import provider.MapleDataProviderFactory;
 import provider.MapleDataTool;
 import tools.Pair;
 import tools.StringUtil;
+import tools.Triple;
 
 public class MapleItemInformationProvider {
 
@@ -188,6 +189,55 @@ public class MapleItemInformationProvider {
             itemPairs.add(new Pair<Integer, String>(Integer.parseInt(itemFolder.getName()), MapleDataTool.getString("name", itemFolder, "NO-NAME")));
         }
         return itemPairs;
+    }
+
+    public List<Triple<Integer, String, String>> getAllItemInfo() {
+        final List<Triple<Integer, String, String>> itemInfoList = new ArrayList<>();
+        MapleData itemsData = this.stringData.getData("Cash.img");
+        for (final MapleData itemFolder : itemsData.getChildren()) {
+            itemInfoList.add(new Triple<>(Integer.parseInt(itemFolder.getName()),
+                    MapleDataTool.getString("name", itemFolder, "NO-NAME"),
+                    MapleDataTool.getString("desc", itemFolder, "NO-DESC"))
+            );
+        }
+        itemsData = this.stringData.getData("Consume.img");
+        for (final MapleData itemFolder : itemsData.getChildren()) {
+            itemInfoList.add(new Triple<>(Integer.parseInt(itemFolder.getName()),
+                    MapleDataTool.getString("name", itemFolder, "NO-NAME"),
+                    MapleDataTool.getString("desc", itemFolder, "NO-DESC"))
+            );
+        }
+        itemsData = this.stringData.getData("Eqp.img").getChildByPath("Eqp");
+        for (final MapleData eqpType : itemsData.getChildren()) {
+            for (final MapleData itemFolder2 : eqpType.getChildren()) {
+                itemInfoList.add(new Triple<>(Integer.parseInt(itemFolder2.getName()),
+                        MapleDataTool.getString("name", itemFolder2, "NO-NAME"),
+                        MapleDataTool.getString("desc", itemFolder2, "NO-DESC"))
+                );
+            }
+        }
+        itemsData = this.stringData.getData("Etc.img").getChildByPath("Etc");
+        for (final MapleData itemFolder : itemsData.getChildren()) {
+            itemInfoList.add(new Triple<>(Integer.parseInt(itemFolder.getName()),
+                    MapleDataTool.getString("name", itemFolder, "NO-NAME"),
+                    MapleDataTool.getString("desc", itemFolder, "NO-DESC"))
+            );
+        }
+        itemsData = this.stringData.getData("Ins.img");
+        for (final MapleData itemFolder : itemsData.getChildren()) {
+            itemInfoList.add(new Triple<>(Integer.parseInt(itemFolder.getName()),
+                    MapleDataTool.getString("name", itemFolder, "NO-NAME"),
+                    MapleDataTool.getString("desc", itemFolder, "NO-DESC"))
+            );
+        }
+        itemsData = this.stringData.getData("Pet.img");
+        for (final MapleData itemFolder : itemsData.getChildren()) {
+            itemInfoList.add(new Triple<>(Integer.parseInt(itemFolder.getName()),
+                    MapleDataTool.getString("name", itemFolder, "NO-NAME"),
+                    MapleDataTool.getString("desc", itemFolder, "NO-DESC"))
+            );
+        }
+        return itemInfoList;
     }
 
     protected MapleData getStringData(final int itemId) {

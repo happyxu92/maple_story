@@ -45,6 +45,10 @@ public class MapleLifeFactory
         System.err.println("Unknown Life type: " + type + "");
         return null;
     }
+
+    public static MapleData getMobStringData() {
+        return mobStringData;
+    }
     
     public static int getNPCLocation(final int npcid) {
         if (MapleLifeFactory.NPCLoc.containsKey(npcid)) {

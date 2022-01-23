@@ -3,6 +3,8 @@ package server;
 import client.MapleCharacter;
 import client.MapleClient;
 import client.SkillFactory;
+import client.inventory.Equip;
+import client.inventory.MapleInventoryType;
 import constants.GameConstants;
 import constants.OtherSettings;
 import constants.ServerConstants;
@@ -28,6 +30,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import provider.MapleData;
+import server.custom.auction.AuctionManager;
 import server.events.MapleOxQuizFactory;
 import server.life.MapleLifeFactory;
 import server.life.MapleMonsterInformationProvider;
@@ -35,7 +40,9 @@ import server.life.MobSkillFactory;
 import server.maps.MapleMapFactory;
 import server.quest.MapleQuest;
 import tools.FileoutputUtil;
+import tools.Pair;
 import tools.StringUtil;
+import tools.Triple;
 
 public class Start
 {
@@ -60,6 +67,7 @@ public class Start
         System.setProperty("server_name", "Happy");
         OtherSettings.getInstance();
         Start.instance.run();
+//        getInfoToSql();
     }
     
     public void run() throws InterruptedException {
@@ -440,6 +448,109 @@ public class Start
         @Override
         public void run() {
             new Thread(ShutdownServer.getInstance()).start();
+        }
+    }
+
+    private static void getInfoToSql() {
+        getMobInfo();
+        getItemInfo();
+        System.out.println("Get info completed!");
+    }
+
+    private static void getMobInfo() {
+        final Connection con = DatabaseConnection.getConnection();
+        try {
+            con.setAutoCommit(true);
+            PreparedStatement ps = con.prepareStatement("Truncate Table mob_info");;
+            ps.executeUpdate();
+            ps.close();
+            for (MapleData mobData: MapleLifeFactory.getMobStringData().getChildren()) {
+                int mobId = Integer.parseInt(mobData.getName());
+                String name = mobData.getChildByPath("name").getData().toString();
+                ps = con.prepareStatement("INSERT INTO mob_info (`mobid`, `name`) VALUES (?, ?)");
+                ps.setInt(1, mobId);
+                ps.setString(2, name);
+                ps.executeUpdate();
+                ps.close();
+            }
+        } catch (SQLException e3) {
+            FileoutputUtil.outputFileError(FileoutputUtil.PacketEx_Log, e3);
+        }
+    }
+
+    private static void getItemInfo() {
+        List<Triple<Integer, String, String>> allItems = MapleItemInformationProvider.getInstance().getAllItemInfo();
+        final Connection con = DatabaseConnection.getConnection();
+        try {
+            con.setAutoCommit(true);
+            PreparedStatement ps2 = con.prepareStatement("Truncate Table item_info");;
+            ps2.executeUpdate();
+            ps2.close();
+            for (Triple<Integer, String, String> triple: allItems) {
+                ps2 = con.prepareStatement("INSERT INTO item_info (`itemid`, `name`, `desc`, `level`, `str`, `dex`, " +
+                        "`luk`, `hp`, `mp`, `watk`, `matk`, `wdef`, `mdef`, `acc`, `avoid`, `hands`, `speed`, `jump`, " +
+                        "`ViciousHammer`, `potential1`, `potential2`, `potential3`, `hpR`, `mpR`, `itemLevel`" +
+                        ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                ps2.setInt(1, triple.getLeft());
+                ps2.setString(2, triple.getMid());
+                ps2.setString(3, triple.getRight());
+                setEquInfo(ps2, triple.getLeft());
+                ps2.executeUpdate();
+                ps2.close();
+            }
+        } catch (SQLException e3) {
+            System.out.println("Sql error:" + e3);
+        }
+    }
+
+    private static void setEquInfo(PreparedStatement ps, Integer equipId) throws SQLException {
+        if (MapleInventoryType.EQUIP.equals(AuctionManager.getInstance().getItemTypeByItemId(equipId))) {
+            Equip equip = (Equip) MapleItemInformationProvider.getInstance().getEquipById(equipId);
+            ps.setInt(4, equip.getLevel());
+            ps.setInt(5, equip.getStr());
+            ps.setInt(6, equip.getDex());
+            ps.setInt(7, equip.getLuk());
+            ps.setInt(8, equip.getHp());
+            ps.setInt(9, equip.getMp());
+            ps.setInt(10, equip.getWatk());
+            ps.setInt(11, equip.getMatk());
+            ps.setInt(12, equip.getWdef());
+            ps.setInt(13, equip.getMdef());
+            ps.setInt(14, equip.getAcc());
+            ps.setInt(15, equip.getAvoid());
+            ps.setInt(16, equip.getHands());
+            ps.setInt(17, equip.getSpeed());
+            ps.setInt(18, equip.getJump());
+            ps.setInt(19, equip.getViciousHammer());
+            ps.setInt(20, equip.getPotential1());
+            ps.setInt(21, equip.getPotential2());
+            ps.setInt(22, equip.getPotential3());
+            ps.setInt(23, equip.getHpR());
+            ps.setInt(24, equip.getMpR());
+            ps.setInt(25, equip.getEquipLevel());
+        } else {
+            ps.setInt(4, 0);
+            ps.setInt(5, 0);
+            ps.setInt(6, 0);
+            ps.setInt(7, 0);
+            ps.setInt(8, 0);
+            ps.setInt(9, 0);
+            ps.setInt(10, 0);
+            ps.setInt(11, 0);
+            ps.setInt(12, 0);
+            ps.setInt(13, 0);
+            ps.setInt(14, 0);
+            ps.setInt(15, 0);
+            ps.setInt(16, 0);
+            ps.setInt(17, 0);
+            ps.setInt(18, 0);
+            ps.setInt(19, 0);
+            ps.setInt(20, 0);
+            ps.setInt(21, 0);
+            ps.setInt(22, 0);
+            ps.setInt(23, 0);
+            ps.setInt(24, 0);
+            ps.setInt(25, 0);
         }
     }
 }

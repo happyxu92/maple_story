@@ -62,10 +62,14 @@ public class MapleDataTool
     }
     
     public static int getIntConvert(final MapleData data) {
-        if (data.getType() == MapleDataType.STRING) {
-            return Integer.parseInt(getString(data));
+        try {
+            if (data.getType() == MapleDataType.STRING) {
+                return Integer.parseInt(getString(data));
+            }
+            return getInt(data);
+        } catch (Exception e){
+            return 0;
         }
-        return getInt(data);
     }
     
     public static int getIntConvert(final String path, final MapleData data) {
